@@ -30,7 +30,10 @@ func ReadAll() ([]Expense, error) {
 		}
 
 		expenses := strings.Split(line, ";")
-		sum, _ := strconv.ParseFloat(expenses[1], 64)
+		sum, err := strconv.ParseFloat(expenses[1], 64)
+		if err != nil {
+			return []Expense{}, nil
+		}
 		res = append(res, Expense{Title: expenses[0], Amount: sum})
 
 	}
